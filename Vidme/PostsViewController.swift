@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class PostsViewController: UIViewController, PersistentContainerDelegate {
+class PostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PersistentContainerDelegate {
 
     // MARK: - API
 
@@ -43,7 +43,7 @@ class PostsViewController: UIViewController, PersistentContainerDelegate {
 
     func containerDidFetchPosts(posts: Results<Post>?) {
         if posts != nil {
-            self.posts = posts
+            self.posts = posts!
         }
     }
 
@@ -59,9 +59,17 @@ class PostsViewController: UIViewController, PersistentContainerDelegate {
         realmManager?.fetchPosts()
     }
 
-}
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let postViewController = segue.destination as? PostViewController {
+            guard let selectedIndexPath = tableView.indexPathForSelectedRow, let selectedPost = posts?[selectedIndexPath.row] else {
+                print(trace(file: #file, function: #function, line: #line))
+                return
+            }
+            postViewController.selectedPost = selectedPost
+        }
+    }
 
-extension PostsViewController: UITableViewDelegate {
+    // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -71,9 +79,7 @@ extension PostsViewController: UITableViewDelegate {
         return 44
     }
 
-}
-
-extension PostsViewController: UITableViewDataSource {
+    // MARK: - UITableViewDataSource
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -87,11 +93,11 @@ extension PostsViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.id, for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
+        cell.configureCell(post: posts?[indexPath.row])
         return cell
     }
 
 }
-
 
 
 

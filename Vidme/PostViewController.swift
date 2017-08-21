@@ -9,11 +9,11 @@
 import UIKit
 import RealmSwift
 
-class PostViewController: UIViewController, PersistentContainerDelegate {
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PersistentContainerDelegate {
 
     // MARK: - API
 
-    var comments: [Comment]? {
+    var selectedPost: Post? {
         didSet {
             self.tableViewReload()
         }
@@ -52,10 +52,8 @@ class PostViewController: UIViewController, PersistentContainerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
-}
 
-extension PostViewController: UITableViewDelegate {
+    // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -65,23 +63,24 @@ extension PostViewController: UITableViewDelegate {
         return 44
     }
 
-}
-
-extension PostViewController: UITableViewDataSource {
+    // MARK: - UITableViewDataSource
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return comments?.count ?? 0
+        return selectedPost?.comments.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CommentCell.id, for: indexPath) as? CommentCell else {
             return UITableViewCell()
         }
+        cell.configureCell(comment: selectedPost?.comments[indexPath.row])
         return cell
     }
     
 }
+
+

@@ -10,28 +10,25 @@ import UIKit
 
 class CommentCell: UITableViewCell {
 
-    var comment: Comment? {
-        didSet {
-            updateCell()
-        }
-    }
-
     static let id = String(describing: CommentCell.self)
 
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
 
-    private func updateCell() {
-        // STEP 1: reset any existing UI info/outlets, otherwise info could become misplaced
+    func configureCell(comment: Comment?) {
         userLabel?.text = nil
         dateLabel?.text = nil
         commentLabel?.text = nil
-        // STEP 2: load new info from user (if any)
-        
+
+        if let comment = comment {
+            userLabel.text = comment.username
+            dateLabel.text = comment.created_at.toRelativeDate()
+            commentLabel.text = comment.text
+        }
     }
 
-    private func setupViews() {
+    private func setupCell() {
         self.backgroundColor = UIColor.darkGray
         self.userLabel.text = "username"
         self.dateLabel.text = "date"
@@ -40,7 +37,7 @@ class CommentCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupViews()
+        setupCell()
     }
 
 }

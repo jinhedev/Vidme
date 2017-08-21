@@ -25,6 +25,13 @@
 		C5F84B971F4B18E8000CED14 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84B961F4B18E8000CED14 /* libsqlite3.tbd */; };
 		C5F84B9B1F4B2542000CED14 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F84B9A1F4B2542000CED14 /* RealmManager.swift */; };
 		C5F84B9D1F4B2661000CED14 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F84B9C1F4B2661000CED14 /* Utilities.swift */; };
+		C5F84BA01F4B3976000CED14 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84B9F1F4B3976000CED14 /* Alamofire.framework */; };
+		C5F84BA11F4B3976000CED14 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84B9F1F4B3976000CED14 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C5F84BA31F4B397E000CED14 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84BA21F4B397E000CED14 /* Locksmith.framework */; };
+		C5F84BA41F4B397E000CED14 /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84BA21F4B397E000CED14 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C5F84BA81F4B3DAA000CED14 /* Constaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F84BA71F4B3DAA000CED14 /* Constaint.swift */; };
+		C5F84BAA1F4B8BEC000CED14 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F84BA91F4B8BEC000CED14 /* WebServices.swift */; };
+		C5F84BAC1F4B92EE000CED14 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84BAB1F4B92EE000CED14 /* AlamofireImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +42,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				C5F84B911F4B18B9000CED14 /* RealmSwift.framework in Embed Frameworks */,
+				C5F84BA41F4B397E000CED14 /* Locksmith.framework in Embed Frameworks */,
+				C5F84BA11F4B3976000CED14 /* Alamofire.framework in Embed Frameworks */,
 				C5F84B8F1F4B18B9000CED14 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -55,12 +64,18 @@
 		C5F43BB01F4B0C4700F702DE /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		C5F43BB21F4B0C6300F702DE /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		C5F43BB51F4B0CB000F702DE /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		C5F84B8C1F4B18B9000CED14 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
-		C5F84B8D1F4B18B9000CED14 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = ../Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		C5F84B8C1F4B18B9000CED14 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		C5F84B8D1F4B18B9000CED14 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		C5F84B941F4B18E0000CED14 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C5F84B961F4B18E8000CED14 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C5F84B9A1F4B2542000CED14 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		C5F84B9C1F4B2661000CED14 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		C5F84B9C1F4B2661000CED14 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = ../Utilities.swift; sourceTree = "<group>"; };
+		C5F84B9E1F4B395D000CED14 /* Vidme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Vidme.entitlements; path = Vidme/Vidme.entitlements; sourceTree = "<group>"; };
+		C5F84B9F1F4B3976000CED14 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		C5F84BA21F4B397E000CED14 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
+		C5F84BA71F4B3DAA000CED14 /* Constaint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constaint.swift; sourceTree = "<group>"; };
+		C5F84BA91F4B8BEC000CED14 /* WebServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebServices.swift; path = Vidme/WebServices.swift; sourceTree = "<group>"; };
+		C5F84BAB1F4B92EE000CED14 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +85,10 @@
 			files = (
 				C5F84B971F4B18E8000CED14 /* libsqlite3.tbd in Frameworks */,
 				C5F84B951F4B18E0000CED14 /* libz.tbd in Frameworks */,
+				C5F84BAC1F4B92EE000CED14 /* AlamofireImage.framework in Frameworks */,
 				C5F84B901F4B18B9000CED14 /* RealmSwift.framework in Frameworks */,
+				C5F84BA31F4B397E000CED14 /* Locksmith.framework in Frameworks */,
+				C5F84BA01F4B3976000CED14 /* Alamofire.framework in Frameworks */,
 				C5F84B8E1F4B18B9000CED14 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,9 +99,10 @@
 		C5F43B8D1F4B07F100F702DE = {
 			isa = PBXGroup;
 			children = (
+				C5F84B9E1F4B395D000CED14 /* Vidme.entitlements */,
 				C5F84B991F4B19CE000CED14 /* Shared */,
-				C5F84B8B1F4B174B000CED14 /* Frameworks */,
 				C5F43B981F4B07F100F702DE /* Vidme iOS */,
+				C5F84BA61F4B39E5000CED14 /* Vidme macOS */,
 				C5F43B971F4B07F100F702DE /* Products */,
 				C5F84B931F4B18E0000CED14 /* Frameworks */,
 			);
@@ -100,12 +119,10 @@
 		C5F43B981F4B07F100F702DE /* Vidme iOS */ = {
 			isa = PBXGroup;
 			children = (
-				C5F84B8A1F4B123F000CED14 /* Helpers */,
 				C5F43BB71F4B0CED00F702DE /* Controllers */,
 				C5F43BB91F4B0D0F00F702DE /* Storyboards */,
 				C5F43BB81F4B0D0200F702DE /* Supporting Files */,
 				C5F43BAF1F4B0C3F00F702DE /* Views */,
-				C5F43BB41F4B0C7100F702DE /* Models */,
 			);
 			name = "Vidme iOS";
 			path = Vidme;
@@ -127,6 +144,7 @@
 				C5F43BB21F4B0C6300F702DE /* Comment.swift */,
 			);
 			name = Models;
+			path = Vidme;
 			sourceTree = "<group>";
 		};
 		C5F43BB71F4B0CED00F702DE /* Controllers */ = {
@@ -161,23 +179,20 @@
 			isa = PBXGroup;
 			children = (
 				C5F84B9A1F4B2542000CED14 /* RealmManager.swift */,
+				C5F84B9C1F4B2661000CED14 /* Utilities.swift */,
 			);
 			name = Helpers;
-			sourceTree = "<group>";
-		};
-		C5F84B8B1F4B174B000CED14 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C5F84B8C1F4B18B9000CED14 /* Realm.framework */,
-				C5F84B8D1F4B18B9000CED14 /* RealmSwift.framework */,
-			);
-			name = Frameworks;
 			path = Vidme;
 			sourceTree = "<group>";
 		};
 		C5F84B931F4B18E0000CED14 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C5F84BAB1F4B92EE000CED14 /* AlamofireImage.framework */,
+				C5F84BA21F4B397E000CED14 /* Locksmith.framework */,
+				C5F84B9F1F4B3976000CED14 /* Alamofire.framework */,
+				C5F84B8C1F4B18B9000CED14 /* Realm.framework */,
+				C5F84B8D1F4B18B9000CED14 /* RealmSwift.framework */,
 				C5F84B961F4B18E8000CED14 /* libsqlite3.tbd */,
 				C5F84B941F4B18E0000CED14 /* libz.tbd */,
 			);
@@ -187,9 +202,19 @@
 		C5F84B991F4B19CE000CED14 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				C5F84B9C1F4B2661000CED14 /* Utilities.swift */,
+				C5F84B8A1F4B123F000CED14 /* Helpers */,
+				C5F43BB41F4B0C7100F702DE /* Models */,
+				C5F84BA71F4B3DAA000CED14 /* Constaint.swift */,
+				C5F84BA91F4B8BEC000CED14 /* WebServices.swift */,
 			);
 			name = Shared;
+			sourceTree = "<group>";
+		};
+		C5F84BA61F4B39E5000CED14 /* Vidme macOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Vidme macOS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +253,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = ZLUJC28Y9H;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -286,6 +316,8 @@
 				C5F43BAC1F4B0B3000F702DE /* PostCell.swift in Sources */,
 				C5F84B9B1F4B2542000CED14 /* RealmManager.swift in Sources */,
 				C5F43BB31F4B0C6300F702DE /* Comment.swift in Sources */,
+				C5F84BAA1F4B8BEC000CED14 /* WebServices.swift in Sources */,
+				C5F84BA81F4B3DAA000CED14 /* Constaint.swift in Sources */,
 				C5F43B9C1F4B07F100F702DE /* PostsViewController.swift in Sources */,
 				C5F43BAE1F4B0B4C00F702DE /* CommentCell.swift in Sources */,
 				C5F43BB61F4B0CB000F702DE /* PostViewController.swift in Sources */,
@@ -416,6 +448,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Vidme/Vidme.entitlements;
 				DEVELOPMENT_TEAM = ZLUJC28Y9H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -433,6 +466,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Vidme/Vidme.entitlements;
 				DEVELOPMENT_TEAM = ZLUJC28Y9H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

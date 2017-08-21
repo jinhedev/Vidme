@@ -61,7 +61,7 @@
                                         <connections>
                                             <outlet property="postImageView" destination="fYe-bZ-rf0" id="Zlz-i8-83k"/>
                                             <outlet property="titleLabel" destination="o4z-2G-jeJ" id="zlg-Oy-FDU"/>
-                                            <segue destination="iLw-f6-WkI" kind="show" id="Syx-1Z-fCQ">
+                                            <segue destination="iLw-f6-WkI" kind="show" identifier="segueFromPostsVCToPostVC" id="Syx-1Z-fCQ">
                                                 <segue key="commit" inheritsFrom="parent" id="AgB-zT-IDq"/>
                                                 <segue key="preview" inheritsFrom="commit" id="pb3-ln-poT"/>
                                             </segue>
@@ -207,7 +207,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ocd-r6-9Sh" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="teB-cU-lGY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="p6P-dL-nop">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="p6P-dL-nop">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -272,7 +272,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Phn-nd-qNW" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="3Mb-xz-TSe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="54p-Pf-euL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="54p-Pf-euL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -314,7 +314,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zvl-mh-sLw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="more" id="2GO-Hj-KGE"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eOE-zH-zFX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eOE-zH-zFX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

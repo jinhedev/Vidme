@@ -12,6 +12,7 @@ import RealmSwift
 final class Comment: Object {
 
     dynamic var id = ""
+    dynamic var username = ""
     dynamic var text = ""
     dynamic var created_at = NSDate()
     dynamic var updated_at = NSDate()
@@ -22,9 +23,10 @@ final class Comment: Object {
         return "id"
     }
 
-    convenience init(id: String, text: String, created_at: NSDate, updated_at: NSDate, upvotes: Int) {
+    convenience init(id: String, username: String, text: String, created_at: NSDate, updated_at: NSDate, upvotes: Int) {
         self.init()
         self.id = id
+        self.username = username
         self.created_at = created_at
         self.updated_at = updated_at
         self.upvotes = upvotes
