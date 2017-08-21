@@ -7,7 +7,28 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Comment: NSObject {
+final class Comment: Object {
+
+    dynamic var id = ""
+    dynamic var text = ""
+    dynamic var created_at = NSDate()
+    dynamic var updated_at = NSDate()
+    dynamic var upvotes: Int = 0
+    let owners = LinkingObjects(fromType: Post.self, property: "comments")
+
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+
+    convenience init(id: String, text: String, created_at: NSDate, updated_at: NSDate, upvotes: Int) {
+        self.init()
+        self.id = id
+        self.created_at = created_at
+        self.updated_at = updated_at
+        self.upvotes = upvotes
+        self.text = text
+    }
     
 }

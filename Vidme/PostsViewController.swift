@@ -7,18 +7,56 @@
 //
 
 import UIKit
+import RealmSwift
 
-class PostsViewController: UIViewController {
+class PostsViewController: UIViewController, PersistentContainerDelegate {
 
     // MARK: - API
 
-    var posts: [Post]?
+    var posts: Results<Post>? {
+        didSet {
+            self.tableViewReload()
+        }
+    }
+
+    @IBOutlet weak var tableView: UITableView!
+
+    private func tableViewReload() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
+    // MARK - PersistentContainerDelegate
+
+    var realmManager: RealmManager?
+
+    private func setupPersistentContainerDelegate() {
+        realmManager = RealmManager()
+        realmManager!.delegate = self
+    }
+
+    func containerDidErr(error: Error) {
+        print(error.localizedDescription)
+        print(trace(file: #file, function: #function, line: #line))
+    }
+
+    func containerDidFetchPosts(posts: Results<Post>?) {
+        if posts != nil {
+            self.posts = posts
+        }
+    }
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        setupPersistentContainerDelegate()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        realmManager?.fetchPosts()
     }
 
 }
