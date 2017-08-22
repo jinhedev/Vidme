@@ -12,23 +12,23 @@ import RealmSwift
 protocol PersistentContainerDelegate {
     func containerDidErr(error: Error)
     func containerDidFetchPosts(posts: Results<Post>?)
-    func containerDidUpdatePost()
-    func containerDidDeletePost()
+    func containerDidUpdateObjects()
+    func containerDidDeletePosts()
 
-    func containerDidUpdateComment()
-    func containerDidDeleteComment()
+    func containerDidFetchComments(comments: Results<Comment>?)
+    func containerDidDeleteComments()
 }
 
 extension PersistentContainerDelegate {
     func containerDidFetchPosts(posts: Results<Post>?) {}
-    func containerDidUpdatePost() {}
-    func containerDidDeletePost() {}
+    func containerDidUpdateObjects() {}
+    func containerDidDeletePosts() {}
 
-    func containerDidUpdateComment() {}
-    func containerDidDeleteComment() {}
+    func containerDidFetchComments(comments: Results<Comment>?) {}
+    func containerDidDeleteComments() {}
 }
 
-var realm = try! Realm()
+var realm = try! Realm() // manual handle migration
 
 class RealmManager: NSObject {
 
@@ -57,14 +57,45 @@ class RealmManager: NSObject {
 
     // MARK: - Get
 
-    func fetchPosts() {
-        let posts = realm.objects(Post.self).sorted(byKeyPath: "upvotes", ascending: false)
+    func fetchPosts(sortedKeyPath: String, ascending: Bool) {
+        let posts = realm.objects(Post.self).sorted(byKeyPath: sortedKeyPath, ascending: ascending)
         delegate?.containerDidFetchPosts(posts: posts)
+    }
+
+    func fetchComments(sortedKeyPath: String, ascending: Bool) {
+        let comments = realm.objects(Comment.self).sorted(byKeyPath: sortedKeyPath, ascending: ascending)
+        delegate?.containerDidFetchComments(comments: comments)
     }
 
     // MARK: - Update & Create
 
+    func updateObjects(objects: [Object]) {
+        do {
+            try realm.write {
+                realm.add(objects, update: true)
+            }
+            delegate?.containerDidUpdateObjects()
+        } catch let err {
+            delegate?.containerDidErr(error: err)
+        }
+    }
+
     // MARK: - Delete
+
+    func deleteObjects(objects: [Object]) {
+        do {
+            try realm.write {
+                realm.delete(objects)
+            }
+            delegate?.containerDidDeletePosts()
+        } catch let err {
+            delegate?.containerDidErr(error: err)
+        }
+    }
+
+    // MARK: - Auth
+
+    // ...
 
 }
 

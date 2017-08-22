@@ -17,10 +17,6 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UILabel!
 
     func configureCell(comment: Comment?) {
-        userLabel?.text = nil
-        dateLabel?.text = nil
-        commentLabel?.text = nil
-
         if let comment = comment {
             userLabel.text = comment.username
             dateLabel.text = comment.created_at.toRelativeDate()

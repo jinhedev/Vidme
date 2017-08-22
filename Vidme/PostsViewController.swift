@@ -9,15 +9,18 @@
 import UIKit
 import RealmSwift
 
-class PostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PersistentContainerDelegate {
+class PostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, WebServiceDelegate, PersistentContainerDelegate {
 
     // MARK: - API
 
     var posts: Results<Post>? {
         didSet {
             self.tableViewReload()
+            self.refreshControl.endRefreshing()
         }
     }
+
+    var refreshControl: UIRefreshControl!
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -27,7 +30,50 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
 
-    // MARK - PersistentContainerDelegate
+    private func setupTableView() {
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
+        self.tableView.refreshControl = self.refreshControl
+    }
+
+    func handleRefresh() {
+        self.tableView.reloadData()
+        webServiceManager?.fetchPosts(type: VideoSort.hot)
+    }
+
+    // MARK: - WebServiceDelegate
+
+    var webServiceManager: WebServiceManager?
+
+    private func setupWebServiceDelegate() {
+        webServiceManager = WebServiceManager()
+        webServiceManager!.delegate = self
+    }
+
+    func webServiceDidErr(error: Error) {
+        promptAlert(title: "Error", message: error.localizedDescription)
+    }
+
+    func webServiceDidFetchPosts(posts: [NSDictionary]) {
+        var realmPosts = [Post]()
+        for post in posts {
+            guard let video_id = post["video_id"] as? String, let thumbnail_url = post["thumbnail_url"] as? String, let title = post["title"] as? String, let postDescription = post["description"] as? String, let created_at = post["date_created"] as? String, let updated_at = post["date_stored"] as? String, let upvotes = post["likes_count"] as? Int else {
+                return
+            }
+            let realmPost = Post()
+            realmPost.id = video_id
+            realmPost.postImagePath = thumbnail_url
+            realmPost.title = title
+            realmPost.postDescription = postDescription
+            realmPost.created_at = created_at.toSystemDate()
+            realmPost.updated_at = updated_at.toSystemDate()
+            realmPost.upvotes = upvotes
+            realmPosts.append(realmPost)
+        }
+        realmManager?.updateObjects(objects: realmPosts)
+    }
+
+    // MARK: - PersistentContainerDelegate
 
     var realmManager: RealmManager?
 
@@ -37,8 +83,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func containerDidErr(error: Error) {
-        print(error.localizedDescription)
-        print(trace(file: #file, function: #function, line: #line))
+        promptAlert(title: "Error", message: error.localizedDescription)
     }
 
     func containerDidFetchPosts(posts: Results<Post>?) {
@@ -47,16 +92,26 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
 
+    func containerDidUpdateObjects() {
+        realmManager?.fetchPosts(sortedKeyPath: "upvotes", ascending: false)
+    }
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+        setupWebServiceDelegate()
         setupPersistentContainerDelegate()
+
+        // comment the code below out in stagging or prod
+        print(realmManager!.pathForContainer())
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        realmManager?.fetchPosts()
+        webServiceManager?.fetchPosts(type: VideoSort.hot)
+        self.refreshControl.beginRefreshing()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -76,7 +131,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return 128
     }
 
     // MARK: - UITableViewDataSource
@@ -95,6 +150,19 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         cell.configureCell(post: posts?[indexPath.row])
         return cell
+    }
+
+}
+
+// Ugly error handler
+
+extension PostsViewController {
+
+    func promptAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.cancel, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 
 }

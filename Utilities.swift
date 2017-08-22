@@ -38,3 +38,16 @@ extension NSDate {
     }
     
 }
+
+extension String {
+
+    /// dateFormatter.dateFormat = "dd/mm/yyyy"
+    func toSystemDate() -> NSDate {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = dateFormatter.date(from: self)! // let it crash here
+        let nsDate = date as NSDate
+        return nsDate
+    }
+
+}
