@@ -1,0 +1,7 @@
+app_identifier "com.vidme.app.rightmeow" # The bundle identifier of your app
+apple_id "rightmeow@protonmail.ch" # Your Apple email address
+
+team_id "ZLUJC28Y9H" # Developer Portal Team ID
+
+# you can even provide different app identifiers, Apple IDs and team names per lane:
+# More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
