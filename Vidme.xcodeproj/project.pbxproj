@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C571CA441F4D2021000F7165 /* TileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571CA431F4D2021000F7165 /* TileCell.swift */; };
+		C5E21BF41F4D459D00016ED3 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E21BF31F4D459D00016ED3 /* AppSettings.swift */; };
+		C5E21BF61F4D483A00016ED3 /* Confidentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E21BF51F4D483A00016ED3 /* Confidentials.swift */; };
 		C5F43B9A1F4B07F100F702DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F43B991F4B07F100F702DE /* AppDelegate.swift */; };
 		C5F43B9C1F4B07F100F702DE /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F43B9B1F4B07F100F702DE /* PostsViewController.swift */; };
 		C5F43B9F1F4B07F100F702DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5F43B9D1F4B07F100F702DE /* Main.storyboard */; };
@@ -54,6 +57,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C571CA431F4D2021000F7165 /* TileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCell.swift; sourceTree = "<group>"; };
+		C5E21BF31F4D459D00016ED3 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		C5E21BF51F4D483A00016ED3 /* Confidentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Confidentials.swift; sourceTree = "<group>"; };
 		C5F43B961F4B07F100F702DE /* Vidme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vidme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F43B991F4B07F100F702DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5F43B9B1F4B07F100F702DE /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +139,7 @@
 		C5F43BAF1F4B0C3F00F702DE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C571CA431F4D2021000F7165 /* TileCell.swift */,
 				C5F43BAB1F4B0B3000F702DE /* PostCell.swift */,
 				C5F43BAD1F4B0B4C00F702DE /* CommentCell.swift */,
 			);
@@ -184,6 +191,8 @@
 				C5F84B9A1F4B2542000CED14 /* RealmManager.swift */,
 				C5F84B9C1F4B2661000CED14 /* Utilities.swift */,
 				C5F84BA71F4B3DAA000CED14 /* Constaint.swift */,
+				C5E21BF31F4D459D00016ED3 /* AppSettings.swift */,
+				C5E21BF51F4D483A00016ED3 /* Confidentials.swift */,
 			);
 			name = Helpers;
 			path = Vidme;
@@ -320,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5E21BF41F4D459D00016ED3 /* AppSettings.swift in Sources */,
 				C5F43BAC1F4B0B3000F702DE /* PostCell.swift in Sources */,
 				C5F84B9B1F4B2542000CED14 /* RealmManager.swift in Sources */,
 				C5F43BB31F4B0C6300F702DE /* Comment.swift in Sources */,
@@ -328,9 +338,11 @@
 				C5F43B9C1F4B07F100F702DE /* PostsViewController.swift in Sources */,
 				C5F43BAE1F4B0B4C00F702DE /* CommentCell.swift in Sources */,
 				C5F43BB61F4B0CB000F702DE /* PostViewController.swift in Sources */,
+				C5E21BF61F4D483A00016ED3 /* Confidentials.swift in Sources */,
 				C5F84B9D1F4B2661000CED14 /* Utilities.swift in Sources */,
 				C5F43B9A1F4B07F100F702DE /* AppDelegate.swift in Sources */,
 				C5F43BB11F4B0C4700F702DE /* Post.swift in Sources */,
+				C571CA441F4D2021000F7165 /* TileCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

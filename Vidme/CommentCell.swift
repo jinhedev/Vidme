@@ -25,10 +25,10 @@ class CommentCell: UITableViewCell {
     }
 
     private func setupCell() {
-        self.backgroundColor = UIColor.darkGray
-        self.userLabel.text = "username"
-        self.dateLabel.text = "date"
-        self.commentLabel.text = "comment"
+        self.backgroundColor = Color.black
+        self.userLabel.text = ""
+        self.dateLabel.text = ""
+        self.commentLabel.text = ""
     }
 
     override func awakeFromNib() {

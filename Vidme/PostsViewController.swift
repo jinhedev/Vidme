@@ -106,12 +106,13 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         // comment the code below out in stagging or prod
         print(realmManager!.pathForContainer())
+
+        webServiceManager?.fetchPosts(type: VideoSort.hot)
+        self.refreshControl.beginRefreshing()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        webServiceManager?.fetchPosts(type: VideoSort.hot)
-        self.refreshControl.beginRefreshing()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -145,7 +146,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.id, for: indexPath) as? PostCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TileCell.id, for: indexPath) as? TileCell else {
             return UITableViewCell()
         }
         cell.configureCell(post: posts?[indexPath.row])
