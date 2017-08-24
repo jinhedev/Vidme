@@ -10,12 +10,18 @@ import UIKit
 import RealmSwift
 import Alamofire
 import AlamofireImage
+import AVFoundation
+import AVKit
 
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WebServiceDelegate, PersistentContainerDelegate {
 
     // MARK: - API
 
     var selectedPost: Post?
+
+    var playerLayer: AVPlayerLayer?
+    var player: AVPlayer?
+    let playerController = AVPlayerViewController()
 
     var comments: Results<Comment>? {
         didSet {
@@ -24,9 +30,29 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+    @IBAction func handlePlay(_ sender: UITapGestureRecognizer) {
+        guard let path = selectedPost?.postVideoPath else { return }
+        let url = URL(fileURLWithPath: path)
+        self.player = AVPlayer(url: url)
+        self.playerController.player = self.player
+
+        playerLayer = AVPlayerLayer(player: player)
+
+
+        self.present(self.playerController, animated: true) { 
+            self.playerController.player?.play()
+        }
+    }
+
+    // MARK: - UITableView
+
     @IBOutlet weak var tableView: UITableView!
 
     var refreshControl: UIRefreshControl!
+
+    func handleRefresh() {
+        self.tableView.reloadData()
+    }
 
     private func tableViewReload() {
         DispatchQueue.main.async {
@@ -38,10 +64,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
         self.tableView.refreshControl = self.refreshControl
-    }
-
-    func handleRefresh() {
-        self.tableView.reloadData()
     }
 
     // MARK: - WebServiceDelegate
@@ -57,6 +79,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         promptAlert(title: "Error", message: error.localizedDescription)
     }
 
+    // ugly
     func webServiceDidFetchComments(comments: [NSDictionary]) {
         var realmComments = [Comment]()
         for comment in comments {
@@ -106,10 +129,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         setupTableView()
         setupWebServiceDelegate()
         setupPersistentContainerDelegate()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         guard let post = selectedPost else { return }
         webServiceManager?.fetchComments(type: CommentSort.list, video_id: post.id)
         self.refreshControl.beginRefreshing()
@@ -166,6 +185,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
 }
+
+// Ugly error handler
 
 extension PostViewController {
 

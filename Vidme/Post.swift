@@ -19,13 +19,16 @@ final class Post: Object {
     dynamic var created_at = NSDate()
     dynamic var updated_at = NSDate()
     dynamic var upvotes: Int = 0
+    dynamic var postVideoPath = ""
+    dynamic var embeded_url = ""
+    dynamic var youtube_override_source = ""
     var comments = List<Comment>()
 
     override static func primaryKey() -> String? {
         return "id"
     }
 
-    convenience init(id: String, title: String, postImagePath: String, created_at: NSDate, updated_at: NSDate, postDescription: String, upvotes: Int, comments: List<Comment>) {
+    convenience init(id: String, title: String, postImagePath: String, postVideoPath: String, embeded_url: String, youtube_override_source: String, created_at: NSDate, updated_at: NSDate, postDescription: String, upvotes: Int, comments: List<Comment>) {
         self.init()
         self.id = id
         self.created_at = created_at
@@ -33,6 +36,9 @@ final class Post: Object {
         self.title = title
         self.postDescription = postDescription
         self.postImagePath = postImagePath
+        self.postVideoPath = postVideoPath
+        self.youtube_override_source = youtube_override_source
+        self.embeded_url = embeded_url
         self.upvotes = upvotes
         self.comments = comments
     }

@@ -8,14 +8,15 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
+import AVFoundation
 
 class PostCell: UITableViewCell {
 
     static let id = String(describing: PostCell.self)
 
+    // MARK: - API
+
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var votesLabel: UILabel!
     @IBOutlet weak var postDescriptionLabel: UILabel!
 
@@ -24,26 +25,13 @@ class PostCell: UITableViewCell {
             titleLabel.text = post.title
             postDescriptionLabel.text = post.postDescription
             votesLabel.text = String(describing: post.upvotes) + " Likes"
-            // download the image and cache it
-            let imageCache = AutoPurgingImageCache(memoryCapacity: 100_000_000, preferredMemoryUsageAfterPurge: 60_000_000)
-            if let cachedImage = imageCache.image(withIdentifier: post.postImagePath) {
-                DispatchQueue.main.async {
-                    self.postImageView.image = cachedImage
-                    return
-                }
+
+            if !post.embeded_url.isEmpty {
+                requestVideo(path: post.embeded_url)
+            } else if !post.youtube_override_source.isEmpty {
+                requestVideo(path: post.youtube_override_source)
             } else {
-                postImageView.image = nil
-                Alamofire.request(post.postImagePath, method: .get).responseImage(completionHandler: { response in
-                    DispatchQueue.main.async {
-                        guard let image = response.result.value else {
-                            print("failed to parse image from response")
-                            return
-                        }
-                        self.postImageView.af_setImage(withURL: URL(string: post.postImagePath)!, placeholderImage: #imageLiteral(resourceName: "Image Placeholder"))
-                        imageCache.add(image, withIdentifier: post.postImagePath)
-                        self.postImageView.image = image
-                    }
-                })
+                print("something is wrong")
             }
         }
     }
@@ -52,26 +40,61 @@ class PostCell: UITableViewCell {
         self.backgroundColor = Color.midNightBlack
         self.titleLabel.text = ""
         self.postDescriptionLabel.text = ""
-        self.postImageView.image = #imageLiteral(resourceName: "Image Placeholder")
     }
+
+    // MARK: - VideoView
+
+    @IBOutlet weak var webView: UIWebView! // just testing
+    @IBOutlet weak var videoView: UIView!
+
+    var avPlayer: AVPlayer?
+
+    var isPlaying: Bool = false
+
+    func fetchVideo(from path: String, completion: () -> Void) {
+        let url = URL(fileURLWithPath: path)
+        avPlayer = AVPlayer(url: url)
+        let avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        self.videoView.layer.addSublayer(avPlayerLayer)
+        avPlayerLayer.frame = self.videoView.frame
+        completion()
+    }
+
+    func requestVideo(path: String) {
+        let url = URL(fileURLWithPath: "https://www.youtube.com/watch?v=594qtjmhOFE")
+        let request = URLRequest(url: url)
+        DispatchQueue.main.async {
+            self.webView.loadRequest(request)
+        }
+    }
+
+    func play() {
+        avPlayer?.play()
+        isPlaying = true
+    }
+
+    func pause() {
+        avPlayer?.pause()
+        isPlaying = false
+    }
+
+    // MARK: - Lifecycle
 
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCell()
     }
 
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        if highlighted == true {
-            self.backgroundColor = Color.lightBlue
-            self.titleLabel.textColor = Color.black
-            self.votesLabel.textColor = Color.black
-            self.postDescriptionLabel.textColor = Color.black
-        } else {
-            self.backgroundColor = Color.midNightBlack
-            self.titleLabel.textColor = Color.white
-            self.votesLabel.textColor = Color.lightGray
-            self.postDescriptionLabel.textColor = Color.white
-        }
+}
+
+extension PostCell: UIWebViewDelegate {
+
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        print(111)
+    }
+
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        print(000)
     }
 
 }

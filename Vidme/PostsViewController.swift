@@ -22,6 +22,13 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     var refreshControl: UIRefreshControl!
 
+    func handleRefresh() {
+        self.tableView.reloadData()
+        webServiceManager?.fetchPosts(type: VideoSort.hot)
+    }
+
+    // MARK: - UITableView
+
     @IBOutlet weak var tableView: UITableView!
 
     private func tableViewReload() {
@@ -34,11 +41,6 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
         self.tableView.refreshControl = self.refreshControl
-    }
-
-    func handleRefresh() {
-        self.tableView.reloadData()
-        webServiceManager?.fetchPosts(type: VideoSort.hot)
     }
 
     // MARK: - WebServiceDelegate
@@ -54,21 +56,36 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
         promptAlert(title: "Error", message: error.localizedDescription)
     }
 
+    // ugly
     func webServiceDidFetchPosts(posts: [NSDictionary]) {
         var realmPosts = [Post]()
         for post in posts {
-            guard let video_id = post["video_id"] as? String, let thumbnail_url = post["thumbnail_url"] as? String, let title = post["title"] as? String, let postDescription = post["description"] as? String, let created_at = post["date_created"] as? String, let updated_at = post["date_stored"] as? String, let upvotes = post["likes_count"] as? Int else {
-                return
+            // parsing json to native swift types
+            if let video_id = post["video_id"] as? String, let thumbnail_url = post["thumbnail_url"] as? String, let title = post["title"] as? String, let postDescription = post["description"] as? String, let created_at = post["date_created"] as? String,
+                let updated_at = post["date_stored"] as? String, let upvotes = post["likes_count"] as? Int {
+                // setting objects
+                let realmPost = Post()
+                realmPost.id = video_id
+                realmPost.postImagePath = thumbnail_url
+                realmPost.title = title
+                realmPost.postDescription = postDescription
+                realmPost.created_at = created_at.toSystemDate()
+                realmPost.updated_at = updated_at.toSystemDate()
+                realmPost.upvotes = upvotes
+
+
+                if let videoPath = post["complete"] as? String {
+                    realmPost.postVideoPath = videoPath
+                }
+                if let embeded_url = post["embed_url"] as? String {
+                    realmPost.embeded_url = embeded_url
+                }
+                if let youtube_override_source = post["youtube_override_source"] as? String {
+                    realmPost.youtube_override_source = youtube_override_source
+                }
+                
+                realmPosts.append(realmPost)
             }
-            let realmPost = Post()
-            realmPost.id = video_id
-            realmPost.postImagePath = thumbnail_url
-            realmPost.title = title
-            realmPost.postDescription = postDescription
-            realmPost.created_at = created_at.toSystemDate()
-            realmPost.updated_at = updated_at.toSystemDate()
-            realmPost.upvotes = upvotes
-            realmPosts.append(realmPost)
         }
         realmManager?.updateObjects(objects: realmPosts)
     }
@@ -109,10 +126,6 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         webServiceManager?.fetchPosts(type: VideoSort.hot)
         self.refreshControl.beginRefreshing()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
