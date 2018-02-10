@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SwiftyJSON
 
 class PostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, WebServiceDelegate, PersistentContainerDelegate {
 

@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-import UIKit
+import SwiftyJSON
 
 protocol WebServiceDelegate {
     func webServiceDidErr(error: Error)
@@ -44,17 +44,14 @@ class WebServiceManager {
     func fetchPosts(type: VideoSort) {
         let url = configureURL(endpoint: type.rawValue)
         Alamofire.request(url, method: HTTPMethod.get, parameters: parammeters, encoding: URLEncoding.queryString, headers: headers).responseJSON { response in
-            guard response.result.isSuccess else {
-                let error = response.result.error!
+            switch response.result {
+            case .success:
+                if let jsonValue = response.result.value as? [String : Any], let posts = jsonValue["videos"] as? [NSDictionary] {
+                    self.delegate?.webServiceDidFetchPosts(posts: posts)
+                }
+            case .failure(let error):
                 self.delegate?.webServiceDidErr(error: error)
-                return
             }
-            guard let json = response.result.value as? [String : Any], let posts = json["videos"] as? [NSDictionary] else {
-                print("failed to parse response into [String : Any]")
-                return
-            }
-            // handle success
-            self.delegate?.webServiceDidFetchPosts(posts: posts)
         }
     }
 
@@ -63,16 +60,14 @@ class WebServiceManager {
         var videoParam = parammeters
         videoParam["video"] = video_id
         Alamofire.request(url, method: HTTPMethod.get, parameters: videoParam, encoding: URLEncoding.queryString, headers: headers).responseJSON { response in
-            guard response.result.isSuccess else {
-                let error = response.result.error!
+            switch response.result {
+            case .success:
+                if let jsonValue = response.result.value as? [String : Any], let comments = jsonValue["comments"] as? [NSDictionary] {
+                    self.delegate?.webServiceDidFetchComments(comments: comments)
+                }
+            case .failure(let error):
                 self.delegate?.webServiceDidErr(error: error)
-                return
             }
-            guard let json = response.result.value as? [String : Any], let comments = json["comments"] as? [NSDictionary] else {
-                print("failed to parse response into [String : Any]")
-                return
-            }
-            self.delegate?.webServiceDidFetchComments(comments: comments)
         }
     }
 

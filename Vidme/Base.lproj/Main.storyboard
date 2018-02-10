@@ -167,22 +167,16 @@
                                                 <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="8V9-Vx-gYb">
                                                     <rect key="frame" x="0.0" y="29" width="375" height="273"/>
                                                     <subviews>
-                                                        <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gra-w7-kWC">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="273"/>
-                                                            <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <dataDetectorType key="dataDetectorTypes"/>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="iLw-f6-WkI" id="Rd7-RS-SU7"/>
-                                                            </connections>
-                                                        </webView>
+                                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="klP-n0-WPS">
+                                                            <rect key="frame" x="347" y="8" width="20" height="20"/>
+                                                            <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </activityIndicatorView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="gra-w7-kWC" secondAttribute="bottom" id="3Su-Iz-u4X"/>
+                                                        <constraint firstItem="klP-n0-WPS" firstAttribute="top" secondItem="8V9-Vx-gYb" secondAttribute="top" constant="8" id="15I-Bz-P1t"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="256" id="HRp-E6-54c"/>
-                                                        <constraint firstAttribute="trailing" secondItem="gra-w7-kWC" secondAttribute="trailing" id="avV-jq-6ec"/>
-                                                        <constraint firstItem="gra-w7-kWC" firstAttribute="leading" secondItem="8V9-Vx-gYb" secondAttribute="leading" id="fXW-PA-Xxy"/>
-                                                        <constraint firstItem="gra-w7-kWC" firstAttribute="top" secondItem="8V9-Vx-gYb" secondAttribute="top" id="z8p-yP-hg8"/>
+                                                        <constraint firstAttribute="trailing" secondItem="klP-n0-WPS" secondAttribute="trailing" constant="8" id="Y6Y-SY-Wb2"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -201,11 +195,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="klP-n0-WPS" id="8V9-wZ-rqX"/>
                                             <outlet property="postDescriptionLabel" destination="tVg-PG-ddg" id="RXk-Ql-822"/>
                                             <outlet property="titleLabel" destination="r7U-fG-Gdg" id="Fim-bh-MOI"/>
                                             <outlet property="videoView" destination="8V9-Vx-gYb" id="ofG-lg-Qso"/>
                                             <outlet property="votesLabel" destination="h66-hU-Lol" id="iaa-0O-o0t"/>
-                                            <outlet property="webView" destination="gra-w7-kWC" id="S3T-3c-fFZ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="106" id="Wgl-v1-y9D" customClass="CommentCell" customModule="Vidme" customModuleProvider="target">

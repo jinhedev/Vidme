@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C571CA441F4D2021000F7165 /* TileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571CA431F4D2021000F7165 /* TileCell.swift */; };
+		C587E19A1F4F7EFB00CC7FF8 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C587E1991F4F7EFB00CC7FF8 /* SwiftyJSON.framework */; };
+		C587E19B1F4F7EFB00CC7FF8 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C587E1991F4F7EFB00CC7FF8 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C5E21BF41F4D459D00016ED3 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E21BF31F4D459D00016ED3 /* AppSettings.swift */; };
 		C5E21BF61F4D483A00016ED3 /* Confidentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E21BF51F4D483A00016ED3 /* Confidentials.swift */; };
 		C5F43B9A1F4B07F100F702DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F43B991F4B07F100F702DE /* AppDelegate.swift */; };
@@ -32,7 +34,7 @@
 		C5F84BA11F4B3976000CED14 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84B9F1F4B3976000CED14 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C5F84BA31F4B397E000CED14 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84BA21F4B397E000CED14 /* Locksmith.framework */; };
 		C5F84BA41F4B397E000CED14 /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84BA21F4B397E000CED14 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C5F84BA81F4B3DAA000CED14 /* Constaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F84BA71F4B3DAA000CED14 /* Constaint.swift */; };
+		C5F84BA81F4B3DAA000CED14 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F84BA71F4B3DAA000CED14 /* Constant.swift */; };
 		C5F84BAA1F4B8BEC000CED14 /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F84BA91F4B8BEC000CED14 /* WebServiceManager.swift */; };
 		C5F84BAE1F4B99D3000CED14 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84BAD1F4B99D3000CED14 /* AlamofireImage.framework */; };
 		C5F84BAF1F4B99D3000CED14 /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5F84BAD1F4B99D3000CED14 /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -47,6 +49,7 @@
 			files = (
 				C5F84B911F4B18B9000CED14 /* RealmSwift.framework in Embed Frameworks */,
 				C5F84BAF1F4B99D3000CED14 /* AlamofireImage.framework in Embed Frameworks */,
+				C587E19B1F4F7EFB00CC7FF8 /* SwiftyJSON.framework in Embed Frameworks */,
 				C5F84BA41F4B397E000CED14 /* Locksmith.framework in Embed Frameworks */,
 				C5F84BA11F4B3976000CED14 /* Alamofire.framework in Embed Frameworks */,
 				C5F84B8F1F4B18B9000CED14 /* Realm.framework in Embed Frameworks */,
@@ -58,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		C571CA431F4D2021000F7165 /* TileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCell.swift; sourceTree = "<group>"; };
+		C587E1991F4F7EFB00CC7FF8 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		C5E21BF31F4D459D00016ED3 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		C5E21BF51F4D483A00016ED3 /* Confidentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Confidentials.swift; sourceTree = "<group>"; };
 		C5F43B961F4B07F100F702DE /* Vidme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vidme.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,7 +85,7 @@
 		C5F84B9E1F4B395D000CED14 /* Vidme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Vidme.entitlements; path = Vidme/Vidme.entitlements; sourceTree = "<group>"; };
 		C5F84B9F1F4B3976000CED14 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		C5F84BA21F4B397E000CED14 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
-		C5F84BA71F4B3DAA000CED14 /* Constaint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constaint.swift; path = ../Constaint.swift; sourceTree = "<group>"; };
+		C5F84BA71F4B3DAA000CED14 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constant.swift; path = ../Constant.swift; sourceTree = "<group>"; };
 		C5F84BA91F4B8BEC000CED14 /* WebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceManager.swift; sourceTree = "<group>"; };
 		C5F84BAD1F4B99D3000CED14 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +97,7 @@
 			files = (
 				C5F84B971F4B18E8000CED14 /* libsqlite3.tbd in Frameworks */,
 				C5F84B951F4B18E0000CED14 /* libz.tbd in Frameworks */,
+				C587E19A1F4F7EFB00CC7FF8 /* SwiftyJSON.framework in Frameworks */,
 				C5F84BAE1F4B99D3000CED14 /* AlamofireImage.framework in Frameworks */,
 				C5F84B901F4B18B9000CED14 /* RealmSwift.framework in Frameworks */,
 				C5F84BA31F4B397E000CED14 /* Locksmith.framework in Frameworks */,
@@ -112,7 +117,6 @@
 				C5F43B981F4B07F100F702DE /* Vidme iOS */,
 				C5F84BA61F4B39E5000CED14 /* Vidme macOS */,
 				C5F43B971F4B07F100F702DE /* Products */,
-				C5F84B931F4B18E0000CED14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +131,7 @@
 		C5F43B981F4B07F100F702DE /* Vidme iOS */ = {
 			isa = PBXGroup;
 			children = (
+				C5F84B931F4B18E0000CED14 /* Frameworks */,
 				C5F43BB71F4B0CED00F702DE /* Controllers */,
 				C5F43BB91F4B0D0F00F702DE /* Storyboards */,
 				C5F43BB81F4B0D0200F702DE /* Supporting Files */,
@@ -190,7 +195,7 @@
 				C5F84BA91F4B8BEC000CED14 /* WebServiceManager.swift */,
 				C5F84B9A1F4B2542000CED14 /* RealmManager.swift */,
 				C5F84B9C1F4B2661000CED14 /* Utilities.swift */,
-				C5F84BA71F4B3DAA000CED14 /* Constaint.swift */,
+				C5F84BA71F4B3DAA000CED14 /* Constant.swift */,
 				C5E21BF31F4D459D00016ED3 /* AppSettings.swift */,
 				C5E21BF51F4D483A00016ED3 /* Confidentials.swift */,
 			);
@@ -206,10 +211,12 @@
 				C5F84B9F1F4B3976000CED14 /* Alamofire.framework */,
 				C5F84B8C1F4B18B9000CED14 /* Realm.framework */,
 				C5F84B8D1F4B18B9000CED14 /* RealmSwift.framework */,
-				C5F84B961F4B18E8000CED14 /* libsqlite3.tbd */,
+				C587E1991F4F7EFB00CC7FF8 /* SwiftyJSON.framework */,
 				C5F84B941F4B18E0000CED14 /* libz.tbd */,
+				C5F84B961F4B18E8000CED14 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		C5F84B991F4B19CE000CED14 /* Shared */ = {
@@ -315,6 +322,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Locksmith.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			outputPaths = (
 			);
@@ -334,7 +342,7 @@
 				C5F84B9B1F4B2542000CED14 /* RealmManager.swift in Sources */,
 				C5F43BB31F4B0C6300F702DE /* Comment.swift in Sources */,
 				C5F84BAA1F4B8BEC000CED14 /* WebServiceManager.swift in Sources */,
-				C5F84BA81F4B3DAA000CED14 /* Constaint.swift in Sources */,
+				C5F84BA81F4B3DAA000CED14 /* Constant.swift in Sources */,
 				C5F43B9C1F4B07F100F702DE /* PostsViewController.swift in Sources */,
 				C5F43BAE1F4B0B4C00F702DE /* CommentCell.swift in Sources */,
 				C5F43BB61F4B0CB000F702DE /* PostViewController.swift in Sources */,

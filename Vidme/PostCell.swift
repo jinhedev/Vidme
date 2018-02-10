@@ -27,9 +27,9 @@ class PostCell: UITableViewCell {
             votesLabel.text = String(describing: post.upvotes) + " Likes"
 
             if !post.embeded_url.isEmpty {
-                requestVideo(path: post.embeded_url)
-            } else if !post.youtube_override_source.isEmpty {
-                requestVideo(path: post.youtube_override_source)
+                fetchVideo(from: post.postVideoPath, completion: {
+                    self.play()
+                })
             } else {
                 print("something is wrong")
             }
@@ -44,7 +44,7 @@ class PostCell: UITableViewCell {
 
     // MARK: - VideoView
 
-    @IBOutlet weak var webView: UIWebView! // just testing
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoView: UIView!
 
     var avPlayer: AVPlayer?
@@ -52,6 +52,7 @@ class PostCell: UITableViewCell {
     var isPlaying: Bool = false
 
     func fetchVideo(from path: String, completion: () -> Void) {
+        activityIndicator.startAnimating()
         let url = URL(fileURLWithPath: path)
         avPlayer = AVPlayer(url: url)
         let avPlayerLayer = AVPlayerLayer(player: avPlayer)
@@ -60,17 +61,10 @@ class PostCell: UITableViewCell {
         completion()
     }
 
-    func requestVideo(path: String) {
-        let url = URL(fileURLWithPath: "https://www.youtube.com/watch?v=594qtjmhOFE")
-        let request = URLRequest(url: url)
-        DispatchQueue.main.async {
-            self.webView.loadRequest(request)
-        }
-    }
-
     func play() {
         avPlayer?.play()
         isPlaying = true
+        activityIndicator.stopAnimating()
     }
 
     func pause() {
@@ -86,19 +80,6 @@ class PostCell: UITableViewCell {
     }
 
 }
-
-extension PostCell: UIWebViewDelegate {
-
-    func webViewDidStartLoad(_ webView: UIWebView) {
-        print(111)
-    }
-
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        print(000)
-    }
-
-}
-
 
 
 

@@ -16,7 +16,7 @@ class Confidentials: NSObject {
     // MARK: - Fetch
 
     func fetch(forType: KeychainType) -> String? {
-        if let dictionary = Locksmith.loadDataForUserAccount(userAccount: keychainAccount, inService: keychainService) as? [String : String] {
+        if let dictionary = Locksmith.loadDataForUserAccount(userAccount: KeychainSettings.keychainAccount, inService: KeychainSettings.keychainService) as? [String : String] {
             let token = dictionary[forType.rawValue]!
             return token
         } else {
@@ -28,7 +28,7 @@ class Confidentials: NSObject {
 
     func update(forType: KeychainType, value: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
         do {
-            try Locksmith.updateData(data: [forType.rawValue : value], forUserAccount: keychainAccount, inService: keychainService)
+            try Locksmith.updateData(data: [forType.rawValue : value], forUserAccount: KeychainSettings.keychainAccount, inService: KeychainSettings.keychainService)
             completion(true)
         } catch {
             completion(false)
@@ -39,7 +39,7 @@ class Confidentials: NSObject {
 
     func delete(completion: @escaping (_ isSuccess: Bool) -> Void) {
         do {
-            try Locksmith.deleteDataForUserAccount(userAccount: keychainAccount, inService: keychainService)
+            try Locksmith.deleteDataForUserAccount(userAccount: KeychainSettings.keychainAccount, inService: KeychainSettings.keychainService)
             completion(true)
         } catch {
             completion(false)
@@ -48,14 +48,15 @@ class Confidentials: NSObject {
 
 }
 
-let keychainAccount = "Duckensburg.Vidme.Account"
-let keychainService = "Duckensburg.Vidme.Service"
-let keychainGroup = "Duckensburg.Vidme"
+struct KeychainSettings {
+    static let keychainAccount: String = "Duckensburg.Vidme.Account"
+    static let keychainService: String = "Duckensburg.Vidme.Service"
+    static let keychainGroup: String = "Duckensburg.Vidme"
+}
 
 enum KeychainType: String {
     case accessToken = "access_token"
     case email = "email"
-    case uuid = "uuid"
 }
 
 
